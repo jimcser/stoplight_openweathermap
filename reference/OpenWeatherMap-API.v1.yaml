@@ -43,6 +43,65 @@ paths:
                     type: number
                   timezone:
                     type: number
+                  sys:
+                    type: object
+                    properties:
+                      type:
+                        type: number
+                      id:
+                        type: number
+                      county:
+                        type: string
+                      sunrise:
+                        type: number
+                      sunset:
+                        type: number
+                  clouds:
+                    type: object
+                    properties:
+                      all:
+                        type: number
+                  wind:
+                    type: object
+                    properties:
+                      speed:
+                        type: number
+                      deg:
+                        type: number
+                      '':
+                        type: number
+                  main:
+                    type: object
+                    properties:
+                      temp:
+                        type: number
+                      feels_like:
+                        type: number
+                      temp_min:
+                        type: number
+                      temp_max:
+                        type: number
+                      pressure:
+                        type: number
+                      humidity:
+                        type: number
+                  weather:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        main:
+                          type: string
+                        description:
+                          type: string
+                        icon:
+                          type: string
+            application/xml:
+              schema:
+                type: object
+                properties: {}
       operationId: get-weather
       description: 'Access current weather data for any location on Earth including over 200,000 cities! Current weather is frequently updated based on global models and data from more than 40,000 weather stations.'
       parameters:
