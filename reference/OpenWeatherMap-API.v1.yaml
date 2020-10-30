@@ -98,6 +98,10 @@ paths:
                           type: string
                         icon:
                           type: string
+                  dt:
+                    type: string
+                  base:
+                    type: string
             application/xml:
               schema:
                 type: object
