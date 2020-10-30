@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: OpenWeatherMap -- Current Weather API
   version: '2.5'
-  description: |-
+  description: |
     **A re-packaging of the [API from Open Weather Map](https://openweathermap.org/api) as an exercise for learning more about API documentaion with Stoplight**
 
     **<h4>Current Weather Data</h4>**
