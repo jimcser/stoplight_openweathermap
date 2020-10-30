@@ -33,58 +33,76 @@ paths:
                     properties:
                       lon:
                         type: number
+                        description: 'City geo location, longitude'
                       lat:
                         type: number
-                  cod:
-                    type: number
-                  name:
-                    type: string
-                  id:
-                    type: number
-                  timezone:
-                    type: number
+                        description: 'City geo location, latitude'
                   sys:
                     type: object
                     properties:
                       type:
                         type: number
+                        description: Internal parameter
                       id:
                         type: number
-                      county:
+                        description: Internal parameter
+                      country:
                         type: string
+                        description: 'Country code (GB, JP etc.)'
                       sunrise:
                         type: number
+                        description: 'Sunrise time, unix, UTC'
                       sunset:
                         type: number
+                        description: 'Sunset time, unix, UTC'
+                      message:
+                        type: number
+                        description: Internal parameter
                   clouds:
                     type: object
                     properties:
                       all:
                         type: number
+                        description: 'Cloudiness, %'
                   wind:
                     type: object
                     properties:
                       speed:
                         type: number
+                        description: 'Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.'
                       deg:
                         type: number
-                      '':
+                        description: 'Wind direction, degrees (meteorological)'
+                      gust:
                         type: number
+                        description: 'Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour'
                   main:
                     type: object
                     properties:
                       temp:
                         type: number
+                        description: 'Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.'
                       feels_like:
                         type: number
+                        description: 'Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.'
                       temp_min:
                         type: number
+                        description: 'Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.'
                       temp_max:
                         type: number
+                        description: 'Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.'
                       pressure:
                         type: number
+                        description: 'Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa'
                       humidity:
                         type: number
+                        description: 'Humidity, %'
+                      sea_level:
+                        type: number
+                        description: 'Atmospheric pressure on the sea level, hPa'
+                      grnd_level:
+                        type: number
+                        description: 'Atmospheric pressure on the ground level, hPa'
                   weather:
                     type: array
                     items:
@@ -92,16 +110,35 @@ paths:
                       properties:
                         id:
                           type: number
+                          description: Weather condition id
                         main:
                           type: string
+                          description: 'Group of weather parameters (Rain, Snow, Extreme etc.)'
                         description:
                           type: string
+                          description: 'Weather condition within the group. You can get the output in your language.[Learn more](https://openweathermap.org/current#multi)'
                         icon:
                           type: string
+                          description: Weather icon id
                   dt:
                     type: string
+                    description: 'Time of data calculation, unix, UTC'
                   base:
                     type: string
+                    description: Internal parameter
+                  timezone:
+                    type: number
+                    description: Shift in seconds from UTC
+                  id:
+                    type: number
+                    description: City ID
+                  name:
+                    type: string
+                    description: City name
+                  cod:
+                    type: number
+                    description: Internal parameter
+              examples: {}
             application/xml:
               schema:
                 type: object
@@ -113,7 +150,7 @@ paths:
             type: string
           in: query
           name: zip
-          description: '**Zip code**. Search by zip code. *Example: 95050,us*. Please note that if the country is not specified, the search uses USA as a default'
+          description: 'Postal code. If the country is not specified, the search uses USA Zip Code as the default.'
         - schema:
             type: string
             default: standard
@@ -123,38 +160,37 @@ paths:
               - imperial
           in: query
           name: units
-          description: '**Units**. *Example: imperial*. Possible values: `standard`, `metric`, and `imperial`. When you do not use the `units` parameter, the format is `standard` by default.'
+          description: 'Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default.'
         - schema:
             type: string
           in: query
           name: q
-          description: '**City name**. *Example: London*. You can call by city name, or by city name and country code. The API responds with a list of results that match a searching word. For the query value, type the city name and optionally the country code divided by a comma; use ISO 3166 country codes.'
-          required: true
+          description: |-
+            City name, state code and country code divided by comma, use ISO 3166 country codes.
+            You can specify the parameter not only in English. In this case, the API response should be returned in the same language as the language of requested location name if the location is in our predefined list of more than 200,000 locations.
         - schema:
             type: string
           in: query
           name: id
-          description: '**City ID**. *Example: `2172797`*. You can call by city ID. The API responds with the exact result. The List of city IDs can be downloaded [here](http://bulk.openweathermap.org/sample/). You can include multiple cities in this parameter — just separate them by commas. The limit of locations is 20. *Note: A single ID counts as a one API call. So, if you have city IDs, it’s treated as 3 API calls.*'
-          required: true
+          description: |-
+            City ID. List of city ID 'city.list.json.gz' can be downloaded [here](http://bulk.openweathermap.org/sample/)
+            The limit of locations is 20.
         - schema:
             type: string
           in: query
           name: lat
-          description: '**Latitude**. *Example: 35*. The latitude coordinate of the location of your interest. Must use with `lon`.'
-          required: true
+          description: Geographical coordinates (latitude)
         - schema:
             type: string
           in: query
           name: lon
-          description: '**Longitude**. *Example: 139*. Longitude coordinate of the location of your interest. Must use with `lat `.'
-          required: true
+          description: Geographical coordinates (longitude)
         - schema:
             type: string
             default: en
           in: query
           name: lang
-          description: 'description: **Language**. *Example: en*. You can use lang parameter to get the output in your language. We support the following languages that you can use with the corresponded lang values: Arabic - `ar`, Bulgarian - `bg`, Catalan - `ca`, Czech - `cz`, German - `de`, Greek - `el`, English - `en`, Persian (Farsi) - `fa`, Finnish - `fi`, French - `fr`, Galician - `gl`, Croatian - `hr`, Hungarian - `hu`, Italian - `it`, Japanese - `ja`, Korean - `kr`, Latvian - `la`, Lithuanian - `lt`, Macedonian - `mk`, Dutch - `nl`, Polish - `pl`, Portuguese - `pt`, Romanian - `ro`, Russian - `ru`, Swedish - `se`, Slovak - `sk`, Slovenian - `sl`, Spanish - `es`, Turkish - `tr`, Ukrainian - `ua`, Vietnamese - `vi`, Chinese Simplified - `zh_cn`, Chinese Traditional - `zh_tw`.'
-          required: true
+          description: 'You can use this parameter to get the output in your language. [Learn more](https://openweathermap.org/current#multi)'
         - schema:
             type: string
             enum:
@@ -164,7 +200,12 @@ paths:
             default: json
           in: query
           name: mode
-          description: '**Mode*. *Example: html. Determines the format of the response. Possible values are `json`, `xml`, and `html`. If the mode parameter is empty, the format is `json` by default.'
+          description: Response format. Possible values are xml and html. If you don't use the mode parameter format is JSON by default.
+        - schema:
+            type: string
+          in: query
+          name: appid
+          description: Your unique API key
           required: true
 components:
   schemas: {}
