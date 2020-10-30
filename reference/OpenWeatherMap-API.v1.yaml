@@ -6,10 +6,10 @@ info:
     **A re-packaging of the [API from Open Weather Map](https://openweathermap.org/api) as an exercise for learning more about API documentaion with Stoplight**
 
     **<h4>Current Weather Data</h4>**
-    * Access current weather data for any location including over 200,000 cities <br>
-    * We collect and process weather data from different sources such as global and local weather models, satellites, radars and vast network of weather stations <br>
-    * JSON, XML, and HTML formats<br>
-    * Available for both Free and paid subscriptions<br>
+    * Access current weather data for any location including over 200,000 cities
+    * We collect and process weather data from different sources such as global and local weather models, satellites, radars and vast network of weather stations
+    * JSON, XML, and HTML formats
+    * Available for both Free and paid subscriptions
   contact:
     name: Support
     url: 'https://openweathermap.org/api'
